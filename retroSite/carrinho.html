@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Carrinho de Compras</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-left">
+      <button class="hamburger" aria-label="Abrir menu" id="btn-hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <div class="header-center">
+      <a href="index.html" style="text-decoration: none; color: inherit;">
+        <h1 class="logo">FOUR</h1>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <form class="search-form" role="search" aria-label="Buscar produtos">
+        <label for="search-input" class="visually-hidden">Buscar</label>
+        <input id="search-input" type="search" placeholder="Buscar jogos, consoles e acessórios..." />
+        <button type="submit" aria-label="Pesquisar" class="search-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.5 3a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zm8.5 14.5L20 20l-2-2"/></svg>
+        </button>
+      </form>
+
+      <div class="icon-group">
+        <div class="user-dropdown" id="user-dropdown">
+          <button class="icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="user-menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>
+          </button>
+          <ul class="dropdown-menu" id="user-menu" role="menu" aria-hidden="true">
+            <li role="none"><a role="menuitem" href="login.html" id="link-cadastrar">Cadastrar</a></li>
+            <li role="none"><a role="menuitem" href="login.html" id="link-login">Login</a></li>
+          </ul>
+        </div>
+
+        <div class="cart" id="cart-widget">
+          <a href="carrinho.html">
+            <button class="icon-btn" aria-label="Carrinho de compras" id="btn-cart" href>
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h-2l-1 2h2l3.6 7.59L8.25 17.04A1 1 0 0 0 9 19h9v-2H10.42a1 1 0 0 1-.9-.55L11.1 13h5.45a1 1 0 0 0 .95-.68l1.6-5.2A1 1 0 0 0 18.1 6H6.21"/></svg>
+              <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a> &gt; <span>Carrinho</span>
+    </nav>
+
+    <h1>Seu Carrinho de Compras <span id="cart-count">(3 produtos)</span></h1>
+
+    <div class="cart-layout">
+      <section class="cart-items">
+
+        <div class="cart-item">
+          <div class="item-thumb">
+            <img src="img/supermario/mario-1.jpg" alt="Produto">
+          </div>
+          <div class="item-info">
+            <a href="produto.html" class="item-title">  Fita Super Mario World</a>
+            <p class="item-stock">✅ Em estoque</p>
+            <p class="item-shipping">🚚 Frete grátis</p>
+            <div class="item-actions">
+              <div class="quantidade">
+                <button class="qty-btn" data-action="decrease">-</button>
+                <input type="number" class="qty-input" value="1" min="1">
+                <button class="qty-btn" data-action="increase">+</button>
+              </div>
+              <button class="btn-secondary remove-btn">Remover</button>
+              <button class="btn-secondary save-btn">Salvar para depois</button>
+            </div>
+          </div>
+          <div class="item-price">
+            <p>R$ <span class="unit-price">149.90</span></p>
+            <p>Total: R$ <span class="total-price">149.90</span></p> </div>
+        </div>
+
+        <div class="cart-item">
+          <div class="item-thumb">
+            <img src="img/ps1/ps1-1.png" alt="Produto">
+          </div>
+          <div class="item-info">
+            <a href="produto.html" class="item-title">Playstation 1 - revisado</a>
+            <p class="item-stock">⚠ Apenas 2 em estoque</p>
+            <div class="item-actions">
+              <div class="quantidade">
+                <button class="qty-btn" data-action="decrease">-</button>
+                <input type="number" class="qty-input" value="2" min="1">
+                <button class="qty-btn" data-action="increase">+</button>
+              </div>
+              <button class="btn-secondary remove-btn">Remover</button>
+              <button class="btn-secondary save-btn">Salvar para depois</button>
+            </div>
+          </div>
+          <div class="item-price">
+            <p>R$ <span class="unit-price">799.90</span></p>
+            <p>Total: R$ <span class="total-price">00.80</span></p> </div>
+        </div>
+
+      </section>
+
+      <aside class="cart-summary">
+        <h2>Resumo do pedido</h2>
+        <p>Subtotal: R$ <span id="subtotal">1749.70</span></p>
+        <p>Descontos: - R$ <span id="discount">0.00</span></p>
+
+        <div class="frete">
+          <input type="text" id="cep" placeholder="Digite seu CEP">
+          <button id="calc-frete">Calcular Frete</button>
+        </div>
+
+        <p>Frete: R$ <span id="freight">0.00</span></p>
+        <h3>Total: R$ <span id="grand-total">1749.70</span></h3>
+        <p class="economia">Você economiza R$ <span id="saving">0.00</span> hoje!</p>
+
+        <a href="checkout.html" style="text-decoration: none;">
+          <button class="btn-primary finalizar-btn">Finalizar Compra</button>
+        </a>
+
+        <div class="promo-msg">🎁 Frete grátis acima de R$ 299</div>
+
+        <div class="trust-badges">
+          <p>✅ Compra Segura</p>
+          <p>🔒 Pagamento Protegido</p>
+        </div>
+      </aside>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2025 FOUR - Todos os direitos reservados
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

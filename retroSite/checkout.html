@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FOUR — Finalização de Compra</title>
+
+  <!-- Fonte pixelada -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Link para CSS existente -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Link para CSS do checkout -->
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <button class="hamburger" aria-label="Abrir menu" id="btn-hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <div class="header-center">
+      <a href="index.html" style="text-decoration: none; color: inherit;">
+        <h1 class="logo">FOUR</h1>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <form class="search-form" role="search" aria-label="Buscar produtos">
+        <label for="search-input" class="visually-hidden">Buscar</label>
+        <input id="search-input" type="search" placeholder="Buscar jogos, consoles e acessórios..." />
+        <button type="submit" aria-label="Pesquisar" class="search-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.5 3a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zm8.5 14.5L20 20l-2-2"/></svg>
+        </button>
+      </form>
+
+      <div class="icon-group">
+        <div class="user-dropdown" id="user-dropdown">
+          <button class="icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="user-menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>
+          </button>
+          <ul class="dropdown-menu" id="user-menu" role="menu" aria-hidden="true">
+            <li role="none"><a role="menuitem" href="login.html" id="link-cadastrar">Cadastrar</a></li>
+            <li role="none"><a role="menuitem" href="login.html" id="link-login">Login</a></li>
+          </ul>
+        </div>
+
+        <div class="cart" id="cart-widget">
+          <a href="carrinho.html">
+            <button class="icon-btn" aria-label="Carrinho de compras" id="btn-cart" href>
+              <!-- carrinho SVG -->
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h-2l-1 2h2l3.6 7.59L8.25 17.04A1 1 0 0 0 9 19h9v-2H10.42a1 1 0 0 1-.9-.55L11.1 13h5.45a1 1 0 0 0 .95-.68l1.6-5.2A1 1 0 0 0 18.1 6H6.21"/></svg>
+              <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+            </button>
+          </a>
+        </div>>
+      </div>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Navegação estrutural">
+      <a href="index.html">Home</a> > 
+      <a href="cart.html">Carrinho</a> > 
+      <span>Finalização</span>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="checkout-progress">
+      <div class="progress-steps">
+        <div class="step active" data-step="1">
+          <span class="step-number">1</span>
+          <span class="step-label">Identificação</span>
+        </div>
+        <div class="step active" data-step="2">
+          <span class="step-number">2</span>
+          <span class="step-label">Entrega</span>
+        </div>
+        <div class="step" data-step="3">
+          <span class="step-number">3</span>
+          <span class="step-label">Pagamento</span>
+        </div>
+        <div class="step" data-step="4">
+          <span class="step-number">4</span>
+          <span class="step-label">Confirmação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout principal (60/40) -->
+    <div class="checkout-container">
+      <!-- Coluna da esquerda (60%) -->
+      <div class="checkout-left">
+
+        <!-- Identificação -->
+        <section id="identification-section" class="checkout-section">
+          <h2>Identificação</h2>
+          <form id="identification-form">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" placeholder="Digite seu e-mail" required>
+            </div>
+            <button id="continue-to-delivery" class="btn btn-primary">Continuar para Entrega</button>
+          </form>
+        </section>
+
+
+        <!-- Seção de Entrega -->
+        <section class="checkout-section" id="delivery-section">
+          <h2 class="section-title">Endereço de Entrega</h2>
+          
+          <!-- Seletor de endereço salvo (se usuário logado) -->
+          <div class="saved-addresses" id="saved-addresses" style="display: none;">
+            <h3>Endereços salvos</h3>
+            <div class="address-list">
+              <!-- Endereços seriam carregados dinamicamente -->
+            </div>
+            <button class="btn-secondary" id="new-address-btn">Usar novo endereço</button>
+          </div>
+          
+          <!-- Formulário de endereço -->
+          <form class="address-form" id="address-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cep">CEP</label>
+                <div class="input-with-button">
+                  <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" required>
+                  <button type="button" class="btn-small" id="cep-search">Buscar</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="street">Rua</label>
+                <input type="text" id="street" name="street" required>
+              </div>
+              <div class="form-group">
+                <label for="number">Número</label>
+                <input type="text" id="number" name="number" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="complement">Complemento</label>
+                <input type="text" id="complement" name="complement">
+              </div>
+              <div class="form-group">
+                <label for="neighborhood">Bairro</label>
+                <input type="text" id="neighborhood" name="neighborhood" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" id="city" name="city" required>
+              </div>
+              <div class="form-group">
+                <label for="state">Estado</label>
+                <select id="state" name="state" required>
+                  <option value="">Selecione</option>
+                  <!-- Estados seriam preenchidos dinamicamente -->
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(11) 99999-9999" required>
+              </div>
+            </div>
+          </form>
+          
+          <!-- Opções de frete -->
+          <div class="shipping-options">
+            <h3>Opções de Entrega</h3>
+            <div class="shipping-option" data-shipping="economico">
+              <input type="radio" id="shipping-economico" name="shipping" value="economico" checked>
+              <label for="shipping-economico">
+                <span class="shipping-name">Econômico</span>
+                <span class="shipping-time">5-8 dias úteis</span>
+                <span class="shipping-price">Grátis</span>
+              </label>
+            </div>
+            
+            <div class="shipping-option" data-shipping="padrao">
+              <input type="radio" id="shipping-padrao" name="shipping" value="padrao">
+              <label for="shipping-padrao">
+                <span class="shipping-name">Padrão</span>
+                <span class="shipping-time">3-5 dias úteis</span>
+                <span class="shipping-price">R$ 19,90</span>
+              </label>
+            </div>
+            
+            <div class="shipping-option" data-shipping="expresso">
+              <input type="radio" id="shipping-expresso" name="shipping" value="expresso">
+              <label for="shipping-expresso">
+                <span class="shipping-name">Expresso</span>
+                <span class="shipping-time">1-2 dias úteis</span>
+                <span class="shipping-price">R$ 39,90</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="section-actions">
+            <button class="btn-secondary" id="back-to-identification">Voltar</button>
+            <button class="btn-primary" id="continue-to-payment">Continuar para Pagamento</button>
+          </div>
+        </section>
+
+        <!-- Seção de Pagamento (inicialmente oculta) -->
+        <section class="checkout-section" id="payment-section" style="display: none;">
+          <h2 class="section-title">Método de Pagamento</h2>
+          
+          <!-- Abas de métodos de pagamento -->
+          <div class="payment-tabs">
+            <div class="tab-headers">
+              <button class="tab-header active" data-tab="credit">Cartão de Crédito</button>
+              <button class="tab-header" data-tab="pix">PIX</button>
+              <button class="tab-header" data-tab="boleto">Boleto</button>
+              <button class="tab-header" data-tab="debit">Cartão de Débito</button>
+            </div>
+            
+            <!-- Conteúdo das abas -->
+            <div class="tab-content active" id="credit-tab">
+              <form class="payment-form" id="credit-form">
+                <div class="form-group">
+                  <label for="card-number">Número do Cartão</label>
+                  <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="card-name">Nome no Cartão</label>
+                    <input type="text" id="card-name" name="card-name" required>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="card-expiry">Validade</label>
+                    <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/AA" maxlength="5" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="card-cvv">CVV</label>
+                    <input type="text" id="card-cvv" name="card-cvv" placeholder="000" maxlength="3" required>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="installments">Parcelamento</label>
+                  <select id="installments" name="installments" required>
+                    <option value="1">1x de R$ 948,80 sem juros</option>
+                    <option value="2">2x de R$ 474,40 sem juros</option>
+                    <option value="3">3x de R$ 316,27 sem juros</option>
+                    <option value="4">4x de R$ 237,20 sem juros</option>
+                    <option value="5">5x de R$ 189,76 sem juros</option>
+                    <option value="6">6x de R$ 158,13 sem juros</option>
+                    <option value="7">7x de R$ 135,54 com juros</option>
+                    <option value="8">8x de R$ 118,60 com juros</option>
+                    <option value="9">9x de R$ 105,42 com juros</option>
+                    <option value="10">10x de R$ 94,88 com juros</option>
+                  </select>
+                </div>
+                
+                <div class="form-checkbox">
+                  <input type="checkbox" id="save-card" name="save-card">
+                  <label for="save-card">Salvar dados do cartão para próximas compras</label>
+                </div>
+              </form>
+            </div>
+            
+            <div class="tab-content" id="pix-tab">
+              <div class="pix-info">
+                <p>Pague com PIX e tenha 5% de desconto!</p>
+                <div class="pix-qr-code">
+                  <!-- QR Code seria gerado dinamicamente -->
+                  <div class="qr-placeholder">QR Code PIX</div>
+                </div>
+                <div class="pix-code">
+                  <p>Código PIX (copie e cole no seu app):</p>
+                  <div class="code-container">
+                    <span id="pix-code">00020126580014br.gov.bcb.pix0136aae219e7-8c8a-4e6c-9b3a-8e7f6d5c4b3a5204000053039865802BR5913FOUR RETRO LTDA6008SAO PAULO62070503***6304E2CA</span>
+                    <button class="btn-copy" id="copy-pix">Copiar</button>
+                  </div>
+                </div>
+                <p class="pix-expiry">Este código expira em 30 minutos</p>
+              </div>
+            </div>
+            
+            <div class="tab-content" id="boleto-tab">
+              <div class="boleto-info">
+                <p>Pague com boleto bancário e receba em até 3 dias úteis após o pagamento.</p>
+                <div class="boleto-details">
+                  <p><strong>Vencimento:</strong> <span id="boleto-due-date">10/12/2023</span></p>
+                  <p><strong>Valor:</strong> <span id="boleto-amount">R$ 948,80</span></p>
+                </div>
+                <button class="btn-primary" id="generate-boleto">Gerar Boleto</button>
+                <p class="boleto-instructions">O boleto será gerado e enviado para seu e-mail após a confirmação do pedido.</p>
+              </div>
+            </div>
+            
+            <div class="tab-content" id="debit-tab">
+              <form class="payment-form" id="debit-form">
+                <div class="form-group">
+                  <label for="debit-card-number">Número do Cartão</label>
+                  <input type="text" id="debit-card-number" name="debit-card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="debit-card-name">Nome no Cartão</label>
+                    <input type="text" id="debit-card-name" name="debit-card-name" required>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="debit-card-expiry">Validade</label>
+                    <input type="text" id="debit-card-expiry" name="debit-card-expiry" placeholder="MM/AA" maxlength="5" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="debit-card-cvv">CVV</label>
+                    <input type="text" id="debit-card-cvv" name="debit-card-cvv" placeholder="000" maxlength="3" required>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Cupom de desconto -->
+          <div class="coupon-section">
+            <h3>Cupom de Desconto</h3>
+            <div class="coupon-input">
+              <input type="text" id="coupon-code" placeholder="Digite o código do cupom">
+              <button class="btn-small" id="apply-coupon">Aplicar</button>
+            </div>
+            <div id="coupon-feedback"></div>
+          </div>
+          
+          <div class="section-actions">
+            <button class="btn-secondary" id="back-to-delivery">Voltar</button>
+            <button class="btn-primary" id="continue-to-review">Continuar para Revisão</button>
+          </div>
+        </section>
+
+        <!-- Seção de Revisão (inicialmente oculta) -->
+        <section class="checkout-section" id="review-section" style="display: none;">
+          <h2 class="section-title">Revisão do Pedido</h2>
+          
+          <div class="review-content">
+            <div class="review-section">
+              <h3>Itens do Pedido</h3>
+              <div class="review-items">
+                <!-- Itens seriam carregados dinamicamente -->
+              </div>
+            </div>
+            
+            <div class="review-section">
+              <h3>Endereço de Entrega</h3>
+              <div class="review-address" id="review-address">
+                <!-- Endereço seria preenchido dinamicamente -->
+              </div>
+            </div>
+            
+            <div class="review-section">
+              <h3>Método de Pagamento</h3>
+              <div class="review-payment" id="review-payment">
+                <!-- Método de pagamento seria preenchido dinamicamente -->
+              </div>
+            </div>
+            
+            <div class="security-notice">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+              <span>Suas informações estão protegidas</span>
+            </div>
+          </div>
+          
+          <div class="section-actions">
+            <button class="btn-secondary" id="back-to-payment">Voltar</button>
+            <button class="btn-primary" id="confirm-order">Finalizar Pedido</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Coluna da direita (40%) - Resumo do Pedido -->
+      <aside class="checkout-summary">
+        <div class="summary-sticky">
+          <h2 class="summary-title">Resumo do Pedido</h2>
+          
+          <div class="summary-items">
+            <!-- Itens seriam carregados dinamicamente -->
+            <div class="summary-item">
+              <img src="img/ps1/ps1-1.png" alt="PlayStation clássico">
+              <div class="item-details">
+                <h4>PlayStation clássico — Revisado</h4>
+                <p>Quantidade: 1</p>
+                <p>R$ 799,90</p>
+              </div>
+            </div>
+            
+            <div class="summary-item">
+              <img src="img/supermario/mario-1.jpg" alt="Super Mario World">
+              <div class="item-details">
+                <h4>Super Mario World (Cartucho SNES)</h4>
+                <p>Quantidade: 1</p>
+                <p>R$ 149,90</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="summary-totals">
+            <div class="total-line">
+              <span>Subtotal</span>
+              <span>R$ 949,80</span>
+            </div>
+            <div class="total-line">
+              <span>Frete</span>
+              <span id="summary-shipping">Grátis</span>
+            </div>
+            <div class="total-line discount">
+              <span>Desconto</span>
+              <span id="summary-discount">R$ 0,00</span>
+            </div>
+            <div class="total-line grand-total">
+              <span>Total</span>
+              <span id="summary-total">R$ 949,80</span>
+            </div>
+          </div>
+          
+          <div class="summary-info">
+            <div class="info-section">
+              <h4>Entrega</h4>
+              <p id="summary-delivery-address">Seu endereço aparecerá aqui</p>
+              <p id="summary-delivery-time">5-8 dias úteis</p>
+            </div>
+            
+            <div class="info-section">
+              <h4>Pagamento</h4>
+              <p id="summary-payment-method">Método selecionado aparecerá aqui</p>
+            </div>
+          </div>
+          
+          <div class="security-badges">
+            <div class="badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+              <span>SSL</span>
+            </div>
+            <div class="badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+              <span>Site Protegido</span>
+            </div>
+            <div class="badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+              <span>Compra Segura</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal-overlay" id="confirmation-modal" aria-hidden="true">
+    <div class="modal confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="confirmation-close" aria-label="Fechar">&times;</button>
+      <div class="modal-content">
+        <div class="confirmation-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <h3 id="modal-title">Pedido Confirmado!</h3>
+        <p class="confirmation-number">Número do pedido: <strong id="order-number">FOUR-20231207-001</strong></p>
+        <p>Obrigado por comprar na FOUR. Seu pedido será processado e enviado em breve.</p>
+        <div class="confirmation-actions">
+          <button class="btn-primary" id="continue-shopping">Continuar Comprando</button>
+          <button class="btn-secondary" id="track-order">Acompanhar Pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> FOUR — Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // Configuração para o checkout
+    window.CHECKOUT_CONFIG = {
+      selectors: {
+        btnHamburger: '#btn-hamburger',
+        userMenu: '#user-menu',
+        cartCount: '#cart-count'
+      },
+      shippingOptions: {
+        economico: { price: 0, days: '5-8' },
+        padrao: { price: 19.90, days: '3-5' },
+        expresso: { price: 39.90, days: '1-2' }
+      },
+      couponCodes: {
+        'FIVE5': 5,
+        'TEN10': 10,
+        'WELCOME15': 15
+      }
+    };
+  </script>
+
+  <script src="script.js" defer></script>
+  <script src="checkout.js" defer></script>
+</body>
+</html>

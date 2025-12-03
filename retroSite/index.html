@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FOUR — Catálogo</title>
+
+  <!-- Fonte pixelada (fallback caso não queira online, remova) -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Link para CSS externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <button class="hamburger" aria-label="Abrir menu" id="btn-hamburger">
+        <!-- ícone hambúrguer -->
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <div class="header-center">
+      <a href="index.html" style="text-decoration: none; color: inherit;">
+        <h1 class="logo">FOUR</h1>
+      </a>  
+    </div>
+
+    <div class="header-right">
+      <form class="search-form" role="search" aria-label="Buscar produtos">
+        <label for="search-input" class="visually-hidden">Buscar</label>
+        <input id="search-input" type="search" placeholder="Buscar jogos, consoles e acessórios..." />
+        <button type="submit" aria-label="Pesquisar" class="search-btn">
+          <!-- lupa SVG -->
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.5 3a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zm8.5 14.5L20 20l-2-2"/></svg>
+        </button>
+      </form>
+
+      <div class="icon-group">
+        <div class="user-dropdown" id="user-dropdown">
+          <button class="icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="user-menu">
+            <!-- user SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>
+          </button>
+          <ul class="dropdown-menu" id="user-menu" role="menu" aria-hidden="true">
+            <li role="none"><a role="menuitem" href="login.html" id="link-cadastrar">Cadastrar</a></li>
+            <li role="none"><a role="menuitem" href="login.html" id="link-login">Login</a></li>
+          </ul>
+        </div>
+
+        <div class="cart" id="cart-widget">
+          <a href="carrinho.html">
+            <button class="icon-btn" aria-label="Carrinho de compras" id="btn-cart" href>
+              <!-- carrinho SVG -->
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h-2l-1 2h2l3.6 7.59L8.25 17.04A1 1 0 0 0 9 19h9v-2H10.42a1 1 0 0 1-.9-.55L11.1 13h5.45a1 1 0 0 0 .95-.68l1.6-5.2A1 1 0 0 0 18.1 6H6.21"/></svg>
+              <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="catalog-page">
+    <!-- Carrossel principal -->
+    <section class="hero-carousel" aria-roledescription="carousel" aria-label="Promoções">
+      <div class="carousel-inner" id="main-carousel">
+        <button class="carousel-nav prev" aria-label="Slide anterior">&#10094;</button>
+
+        <div class="carousel-track">
+          <div class="carousel-slide" data-index="0" aria-hidden="false">
+            <img src="img/banner/banner-1.png" alt="Promoção 1 — Super ofertas retro" />
+            <div class="slide-caption">
+              <h2>Promoção Retro — Clássicos com desconto</h2>
+              <p>Consoles e jogos selecionados.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="1" aria-hidden="true">
+            <img src="img/banner/banner-2.png" alt="Promoção 2 — Pacotes especiais" />
+            <div class="slide-caption">
+              <h2>Pacotes Especiais</h2>
+              <p>Economize comprando em conjunto.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="2" aria-hidden="true">
+            <img src="img/banner/banner-3.png" alt="Promoção 3 — Acessórios vintage" />
+            <div class="slide-caption">
+              <h2>Acessórios Vintage</h2>
+              <p>Reposições, peças e controles clássicos.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-nav next" aria-label="Próximo slide">&#10095;</button>
+
+        <div class="carousel-indicators" role="tablist" aria-label="Indicadores do carrossel">
+          <button class="indicator active" data-slide-to="0" aria-label="Ir para slide 1"></button>
+          <button class="indicator" data-slide-to="1" aria-label="Ir para slide 2"></button>
+          <button class="indicator" data-slide-to="2" aria-label="Ir para slide 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conteúdo do catálogo -->
+    <section class="catalog-container">
+      <!-- Filtro lateral -->
+      <aside class="filters" aria-label="Filtros de produto">
+        <h2 class="filters-title">Filtrar por Geração</h2>
+
+        <div class="generation-filters" role="group" aria-label="Gerações">
+          <details class="filter-group" open>
+            <summary>Terceira Geração</summary>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="third" data-value="nes"> Nintendo Entertainment System (NES)</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="third" data-value="master-system"> Sega Master System</label>
+          </details>
+
+          <details class="filter-group" open>
+            <summary>Quarta Geração</summary>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="fourth" data-value="snes"> Super Nintendo (SNES)</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="fourth" data-value="genesis"> Sega Genesis</label>
+          </details>
+
+          <details class="filter-group" open>
+            <summary>Quinta Geração</summary>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="fifth" data-value="playstation"> PlayStation</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="fifth" data-value="n64"> Nintendo 64</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="fifth" data-value="saturn"> Sega Saturn</label>
+          </details>
+
+          <details class="filter-group" open>
+            <summary>Sexta Geração</summary>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="sixth" data-value="ps2"> PlayStation 2</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="sixth" data-value="gamecube"> GameCube</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="sixth" data-value="xbox"> Xbox</label>
+            <label><input type="checkbox" class="filter-checkbox" data-gen="sixth" data-value="dreamcast"> Dreamcast</label>
+          </details>
+        </div>
+      </aside>
+
+      <!-- Produtos e botões de categoria -->
+<section class="products-area">
+  <div class="category-buttons">
+    <button class="pill-btn" data-type="hardware">Consoles & Acessórios</button>
+    <button class="pill-btn" data-type="games">Jogos</button>
+  </div>
+
+  <div class="products-grid" id="products-grid" aria-live="polite">
+    <!-- Product Card -->
+    <article class="product-card" data-type="hardware" data-gen="fifth" data-tags="playstation">
+      
+      <!-- Só a parte do card (imagem + título + preço) dentro do link -->
+      <a href="produto2.html" style="text-decoration: none; color: inherit;">
+        <div class="thumb-carousel" tabindex="0" aria-label="Imagens do produto">
+          <img class="thumb-main" src="img/ps1/ps1-1.png" alt="Console PlayStation clássico" />
+          <div class="thumb-strip">
+            <img src="img/ps1/ps1-1.png" alt="Vista 1" class="thumb" />
+            <img src="img/ps1/ps1-2.png" alt="Vista 2" class="thumb" />
+            <img src="img/ps1/ps1-3.png" alt="Vista 3" class="thumb" />
+          </div>
+        </div>
+
+        <div class="product-info">
+          <h3 class="product-name">PlayStation clássico — Revisado</h3>
+          <p class="product-price">R$ 799,90</p>
+        </div>
+      </a>
+
+      <!-- Botões ficam fora do link -->
+      <div class="product-actions">
+        <button class="icon-btn add-cart" title="Adicionar ao carrinho" aria-label="Adicionar PlayStation ao carrinho" data-product-id="p1">
+          <!-- ícone carrinho pequeno -->
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 4h-2l-1 2h2l3.6 7.59L8.25 17.04A1 1 0 0 0 9 19h9v-2H10.42"/>
+          </svg>
+        </button>
+
+        <button class="btn-primary buy-now" data-product-id="p1">Comprar agora</button>
+      </div>
+    </article>
+
+          <!-- Mais cards de exemplo -->
+          <article class="product-card" data-type="games" data-gen="fourth" data-tags="snes">
+            <div class="thumb-carousel" tabindex="0" aria-label="Imagens do produto">
+              <img class="thumb-main" src="img/supermario/mario-1.jpg" alt="Cartucho SNES" />
+              <div class="thumb-strip">
+                <img src="img/supermario/mario-1.jpg" alt="Vista 1" class="thumb" />
+                <img src="img/supermario/mario-2.jpg" alt="Vista 2" class="thumb" />
+                <img src="img/supermario/mario-3.jpg" alt="Vista 3" class="thumb" />
+              </div>
+            </div>
+
+            <div class="product-info">
+              <h3 class="product-name">Super Mario World (Cartucho SNES)</h3>
+              <p class="product-price">R$ 149,90</p>
+
+              <div class="product-actions">
+                <button class="icon-btn add-cart" title="Adicionar ao carrinho" aria-label="Adicionar Super Mario World ao carrinho" data-product-id="p2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h-2l-1 2h2l3.6 7.59L8.25 17.04A1 1 0 0 0 9 19h9v-2H10.42"/></svg>
+                </button>
+
+                <button class="btn-primary buy-now" data-product-id="p2">Comprar agora</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Placeholder para quando não houver produtos -->
+          <div class="no-results" hidden>Nenhum produto encontrado com os filtros selecionados.</div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Modal rápido de compra (inicialmente escondido) -->
+  <div class="modal-overlay" id="quick-buy-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Fechar">&times;</button>
+      <h3 id="modal-title">Compra rápida</h3>
+      <div class="modal-content">
+        <!-- conteúdo populado via JS -->
+        <p class="modal-product-name"></p>
+        <p class="modal-product-price"></p>
+        <div class="modal-actions">
+          <button class="btn-primary" id="confirm-buy">Confirmar compra</button>
+          <button class="btn-secondary" id="cancel-buy">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> FOUR — Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // Variáveis iniciais para o script.js usar (hooks)
+    window.RETRO_CONFIG = {
+      selectors: {
+        carousel: '#main-carousel',
+        indicators: '.indicator',
+        productGrid: '#products-grid',
+        addCartBtn: '.add-cart',
+        cartCount: '#cart-count',
+        buyNow: '.buy-now',
+        quickBuyModal: '#quick-buy-modal',
+        userMenu: '#user-menu',
+        btnHamburger: '#btn-hamburger'
+      }
+    };
+  </script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
